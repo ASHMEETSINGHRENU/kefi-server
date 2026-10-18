@@ -24,7 +24,8 @@ const allowedOrigins = [
   'http://localhost:5174',
   'http://127.0.0.1:5173',
   'http://127.0.0.1:5174',
-  'https://kefi-kappa.vercel.app/',
+  'https://kefi-kappa.vercel.app',
+  'https://kefi-omega.vercel.app',
   process.env.CLIENT_URL,
 ].filter(Boolean);
 
@@ -35,10 +36,10 @@ app.use(
       if (!origin) {
         return callback(null, true);
       }
-      // Allow exact match or Vercel preview deployments
+      // Allow exact match or any Kefi Vercel deployment / Render domain
       if (
         allowedOrigins.includes(origin) ||
-        /^https:\/\/kefi-omega.*\.vercel\.app$/.test(origin) ||
+        /^https:\/\/kefi.*\.vercel\.app$/.test(origin) ||
         /^https:\/\/.*\.onrender\.com$/.test(origin)
       ) {
         return callback(null, true);
