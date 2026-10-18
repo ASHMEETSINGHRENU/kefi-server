@@ -56,10 +56,27 @@ app.get('/', (req, res) => {
   res.json({
     brand: 'KEFI BY MUKTA',
     tagline: 'Your Style. Your Story. Your Kefi.',
+    status: 'online',
+    server: 'Render Production',
     apiDocumentation: {
-      health: '/api/health',
+      health: 'GET /api/health',
       enquiries: 'POST /api/enquiries',
       contact: 'POST /api/contact',
+      products: {
+        list: 'GET /api/products',
+        create: 'POST /api/products',
+        update: 'PUT /api/products/:id',
+        delete: 'DELETE /api/products/:id',
+      },
+      admin: {
+        login: 'POST /api/admin/login',
+        stats: 'GET /api/admin/stats',
+        enquiries: 'GET /api/admin/enquiries',
+        enquiryStatus: 'PATCH /api/admin/enquiries/:id/status',
+        contacts: 'GET /api/admin/contacts',
+        contactStatus: 'PATCH /api/admin/contacts/:id/status',
+        customers: 'GET /api/admin/customers',
+      },
     },
   });
 });
