@@ -12,7 +12,11 @@ import { notFound, errorHandler } from './middleware/errorHandler.js';
 const app = express();
 
 // Security headers
-app.use(helmet());
+app.use(
+  helmet({
+    crossOriginResourcePolicy: { policy: 'cross-origin' },
+  })
+);
 
 // CORS configuration
 const allowedOrigins = [
@@ -20,6 +24,7 @@ const allowedOrigins = [
   'http://localhost:5174',
   'http://127.0.0.1:5173',
   'http://127.0.0.1:5174',
+  'https://kefi-omega.vercel.app',
   process.env.CLIENT_URL,
 ].filter(Boolean);
 
@@ -27,7 +32,15 @@ app.use(
   cors({
     origin: (origin, callback) => {
       // Allow requests with no origin (like mobile apps, curl, Postman)
-      if (!origin || allowedOrigins.includes(origin)) {
+      if (!origin) {
+        return callback(null, true);
+      }
+      // Allow exact match or Vercel preview deployments
+      if (
+        allowedOrigins.includes(origin) ||
+        /^https:\/\/kefi-omega.*\.vercel\.app$/.test(origin) ||
+        /^https:\/\/.*\.onrender\.com$/.test(origin)
+      ) {
         return callback(null, true);
       }
       return callback(null, true); // Dev convenience while maintaining structure
