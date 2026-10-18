@@ -16,9 +16,9 @@ export const validateEnquiryInput = (data) => {
     }
   }
 
-  const validCollections = ["Women's Wear", "Men's Wear", "Other / Couple Ensemble"];
+  const validCollections = ["Women's Wear", "Men's Wear", "Occasion Wear", "Bridal Couture", "Other / Couple Ensemble"];
   if (!data.collectionType || !validCollections.includes(data.collectionType)) {
-    errors.push('Please select a collection (Women\'s Wear or Men\'s Wear).');
+    errors.push('Please select a valid collection.');
   }
 
   if (!data.outfitCategory || typeof data.outfitCategory !== 'string' || data.outfitCategory.trim().length === 0) {

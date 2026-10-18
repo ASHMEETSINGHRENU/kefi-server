@@ -7,14 +7,15 @@ export const connectDB = async () => {
   
   try {
     const conn = await mongoose.connect(uri, {
-      serverSelectionTimeoutMS: 4000,
+      serverSelectionTimeoutMS: 10000,
     });
     isConnected = true;
-    console.log(`[MongoDB] Connected successfully: ${conn.connection.host}`);
+    console.log(`[MongoDB Atlas] Connected successfully: ${conn.connection.host}`);
     return true;
   } catch (error) {
     isConnected = false;
-    console.warn(`[MongoDB] Notice: Could not connect to MongoDB at ${uri}.`);
+    const sanitizedUri = uri.replace(/:([^:@]+)@/, ':****@');
+    console.warn(`[MongoDB] Notice: Could not connect to MongoDB at ${sanitizedUri}.`);
     console.warn(`[MongoDB] Error: ${error.message}`);
     console.warn(`[MongoDB] Running in graceful local fallback mode (in-memory persistence active).`);
     return false;

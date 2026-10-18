@@ -33,7 +33,7 @@ const contactSchema = new mongoose.Schema(
     },
     status: {
       type: String,
-      enum: ['New', 'Responded', 'Resolved'],
+      enum: ['New', 'Read', 'Responded', 'Resolved'],
       default: 'New',
     },
   },

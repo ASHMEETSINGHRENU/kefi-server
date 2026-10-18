@@ -22,7 +22,7 @@ const enquirySchema = new mongoose.Schema(
     collectionType: {
       type: String,
       required: [true, 'Collection selection is required'],
-      enum: ["Women's Wear", "Men's Wear", "Other / Couple Ensemble"],
+      enum: ["Women's Wear", "Men's Wear", "Occasion Wear", "Bridal Couture", "Other / Couple Ensemble"],
     },
     outfitCategory: {
       type: String,
@@ -87,7 +87,19 @@ const enquirySchema = new mongoose.Schema(
     },
     status: {
       type: String,
-      enum: ['Received', 'In Discussion', 'Design In Progress', 'Completed', 'Archived'],
+      enum: [
+        'Received',
+        'Consultation Scheduled',
+        'In Discussion',
+        'Design In Progress',
+        'Fabric Sourced',
+        'Pattern Making',
+        'In Production',
+        'Fitting Scheduled',
+        'Completed',
+        'Cancelled',
+        'Archived',
+      ],
       default: 'Received',
     },
   },
